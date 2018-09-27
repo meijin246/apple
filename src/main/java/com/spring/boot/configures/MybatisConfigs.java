@@ -17,14 +17,13 @@ import java.io.IOException;
 @Configuration
 @ConfigurationProperties(prefix = "spring.mybatis.config")
 public class MybatisConfigs {
-//    @Value("spring.mybatis.config.basePackage")
-    private String basePackage;
-    private String aliasPackage;
-    private String mapperLocations;
+    private String basePackage="com.spring.boot.dao.mapper";
+    private String aliasPackage="com.spring.boot.models";
+    private String mapperLocations="classpath:mybatis/*Mapper.xml";
     private final String sessionBeanName = "oneSessionFactory";
 
     @Bean(name = sessionBeanName)
-    @Qualifier(sessionBeanName)
+//    @Qualifier(sessionBeanName)
     @ConditionalOnMissingBean
     public SqlSessionFactoryBean mybatisSessionFactory(@Qualifier("springDataSource")DataSource dataSource){
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
@@ -39,34 +38,11 @@ public class MybatisConfigs {
     }
 
     @Bean
+    @Qualifier("myabtisMapperScanner")
     public MapperScannerConfigurer mybatisMapperConfigure(){
         MapperScannerConfigurer configurer = new MapperScannerConfigurer();
         configurer.setBasePackage(basePackage);
         configurer.setSqlSessionFactoryBeanName(sessionBeanName);
         return configurer;
-    }
-
-    public String getBasePackage() {
-        return basePackage;
-    }
-
-    public void setBasePackage(String basePackage) {
-        this.basePackage = basePackage;
-    }
-
-    public String getAliasPackage() {
-        return aliasPackage;
-    }
-
-    public void setAliasPackage(String aliasPackage) {
-        this.aliasPackage = aliasPackage;
-    }
-
-    public String getMapperLocations() {
-        return mapperLocations;
-    }
-
-    public void setMapperLocations(String mapperLocations) {
-        this.mapperLocations = mapperLocations;
     }
 }
