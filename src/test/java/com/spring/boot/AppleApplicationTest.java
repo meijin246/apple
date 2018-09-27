@@ -3,7 +3,6 @@ package com.spring.boot;
 import com.spring.boot.dao.UserDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

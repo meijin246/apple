@@ -3,12 +3,11 @@ package com.spring.boot.configures;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
-import org.springframework.context.annotation.Import;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
@@ -16,12 +15,12 @@ import javax.sql.DataSource;
 import java.io.IOException;
 
 @Configuration
-//@Import(SpringDataSource.class)
 @ConfigurationProperties(prefix = "spring.mybatis.config")
 public class MybatisConfigs {
-    private String basePackage="com.spring.boot.dao.mapper";
-    private String aliasPackage="classpath:mybatis/*Mapper.xml";
-    private String mapperLocations="com.spring.boot.models";
+//    @Value("spring.mybatis.config.basePackage")
+    private String basePackage;
+    private String aliasPackage;
+    private String mapperLocations;
     private final String sessionBeanName = "oneSessionFactory";
 
     @Bean(name = sessionBeanName)
@@ -40,7 +39,6 @@ public class MybatisConfigs {
     }
 
     @Bean
-    @DependsOn(sessionBeanName)
     public MapperScannerConfigurer mybatisMapperConfigure(){
         MapperScannerConfigurer configurer = new MapperScannerConfigurer();
         configurer.setBasePackage(basePackage);
