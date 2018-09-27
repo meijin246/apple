@@ -2,7 +2,9 @@ package com.spring.boot.dao.impl;
 
 import com.spring.boot.dao.UserDao;
 import com.spring.boot.dao.mapper.UserMapper;
+import com.spring.boot.dao.mapper3.RoleMapper;
 import com.spring.boot.models.User;
+import com.spring.boot.models3.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,15 +21,25 @@ public class UserDaoImpl implements UserDao{
    @Autowired
    private UserMapper userMapper;
 
+   @Autowired
+   private RoleMapper roleMapper;
+
     public void insertData(String userName, String address) {
+
         User user = new User();
         user.setUsername(userName);
         user.setAddress(address);
         userMapper.insertData(user);
-//            String sql = "insert into user(username,address) values(?,?)";
-//            template.update(sql,new Object[]{userName,address});
+
+        Role role = new Role();
+        role.setUsername(userName);
+        role.setAddress(address);
+        roleMapper.insertData(role);
+
+
     }
-/*  */
+
+
     public UserMapper getUserMapper() {
         return userMapper;
     }
@@ -36,4 +48,11 @@ public class UserDaoImpl implements UserDao{
         this.userMapper = userMapper;
     }
 
+    public RoleMapper getRoleMapper() {
+        return roleMapper;
+    }
+
+    public void setRoleMapper(RoleMapper roleMapper) {
+        this.roleMapper = roleMapper;
+    }
 }

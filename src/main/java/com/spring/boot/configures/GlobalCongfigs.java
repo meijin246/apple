@@ -13,15 +13,15 @@ import javax.sql.DataSource;
 @Configuration
 public class GlobalCongfigs {
 
-    @Bean
-    public PlatformTransactionManager transactionManager(@Qualifier("springDataSource") DataSource dataSource){
+    @Bean("springTransaction")
+    public PlatformTransactionManager springTransactionManager(@Qualifier("springDataSource") DataSource dataSource){
         return new DataSourceTransactionManager(dataSource);
     }
-/*
-    @Bean
-    @Qualifier("jdbcTemplate")
-    public JdbcTemplate dataTemplate(@Qualifier("springDataSource") DataSource dataSource){
-        return new JdbcTemplate(dataSource);
+
+    @Bean("mybatisTransaction3")
+    public PlatformTransactionManager mybatis3TransactionManager(@Qualifier("mybatisDataSource3") DataSource dataSource){
+        return new DataSourceTransactionManager(dataSource);
     }
-*/
+
+
 }

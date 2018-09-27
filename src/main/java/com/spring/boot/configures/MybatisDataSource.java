@@ -12,17 +12,17 @@ import javax.sql.DataSource;
 
 
 @Configuration
-@ConfigurationProperties(prefix = "spring.datasource.mysql")
-public class SpringDataSource {
+@ConfigurationProperties(prefix = "spring.data.mysql")
+public class MybatisDataSource {
     private String driverClassName;
     private String jdbcUrl;
     private String username;
     private String password;
     private int maximumPoolSize;
 
-    @Bean
+    @Bean(name = "mybatisDataSource3")
     @Order(1)
-    @Qualifier("springDataSource")
+    @Qualifier("mybatisDataSource3")
     public DataSource hikariDataSource(){
 /* */
         System.out.println(driverClassName);
