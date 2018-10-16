@@ -1,6 +1,7 @@
 package com.spring.boot;
 
 import com.spring.boot.dao.UserDao;
+import com.spring.boot.service.TestService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,16 @@ public class AppleApplicationTest {
     @Qualifier("userDao")
     private UserDao userDao;
 
+    @Autowired
+    private TestService service;
+
+
     @Test
-    public void datasource(){
-        userDao.insertData("liuyang","beijing");
+    public void datasource() throws InterruptedException {
+//        userDao.insertData("liuyang","beijing");
+        service.sendMessage("kate");
+//        Thread.sleep(2000);
+//        service.receiveMessage();
     }
 }
 
